@@ -1,9 +1,12 @@
 [submodule "poky"]
 	path = poky
 	url = git@github.com:zackthedelta/poky.git
+	branch = develop
 [submodule "meta-raspberrypi"]
 	path = meta-raspberrypi
 	url = git@github.com:zackthedelta/meta-raspberrypi.git
+	branch = develop
 [submodule "meta-openembedded"]
 	path = meta-openembedded
 	url = git@github.com:zackthedelta/meta-openembedded.git
+	branch = develop
