@@ -12,6 +12,6 @@ file locales
 
 sudo locale-gen en_US.UTF-8
 
-git clone -b scarthgap git://git.yoctoproject.org/poky
-git clone -b scarthgap https://github.com/agherzan/meta-raspberrypi.git
-git clone -b scarthgap https://github.com/openembedded/meta-openembedded.git
+git clone -b develop git@github.com:zackthedelta/poky.git
+git clone -b develop git@github.com:zackthedelta/meta-raspberrypi.git
+git clone -b develop git@github.com:zackthedelta/meta-openembedded.git
