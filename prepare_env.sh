@@ -11,7 +11,3 @@ xterm mesa-common-dev zstd liblz4-tool \
 file locales 
 
 sudo locale-gen en_US.UTF-8
-
-git clone -b develop git@github.com:zackthedelta/poky.git
-git clone -b develop git@github.com:zackthedelta/meta-raspberrypi.git
-git clone -b develop git@github.com:zackthedelta/meta-openembedded.git
