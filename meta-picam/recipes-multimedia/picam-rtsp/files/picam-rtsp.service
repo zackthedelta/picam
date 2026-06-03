@@ -1,0 +1,14 @@
+[Unit]
+Description=Pi Camera RTSP Stream
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+EnvironmentFile=-/etc/default/picam-rtsp
+ExecStart=/usr/bin/picam-rtsp
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target

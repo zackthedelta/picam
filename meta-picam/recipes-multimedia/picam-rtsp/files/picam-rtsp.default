@@ -1,0 +1,6 @@
+# Override these if you need a different RTSP URL or camera pipeline.
+PICAM_RTSP_PORT=8554
+PICAM_RTSP_MOUNT=/camera
+
+# Conservative Pi 3 default for OV5647 through libcamera.
+# PICAM_RTSP_PIPELINE=( libcamerasrc ! video/x-raw,width=640,height=480,framerate=15/1 ! queue ! videoconvert ! x264enc tune=zerolatency speed-preset=ultrafast bitrate=1200 key-int-max=30 ! h264parse config-interval=1 ! rtph264pay name=pay0 pt=96 )
