@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pi Camera</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="shell">
+    <section class="panel stream-panel">
+      <div class="masthead">
+        <div>
+          <p class="eyebrow">Pi Camera</p>
+          <h1>RTSP Stream</h1>
+        </div>
+        <span class="status" id="hostStatus">Ready</span>
+      </div>
+
+      <div class="endpoint-block">
+        <label for="rtspUrl">Stream URL</label>
+        <div class="url-row">
+          <input id="rtspUrl" type="text" readonly>
+          <button id="copyButton" type="button" aria-label="Copy RTSP URL" title="Copy RTSP URL">
+            Copy
+          </button>
+          <a id="openLink" class="button-link" href="#">Open</a>
+        </div>
+      </div>
+
+      <div class="preview">
+        <div class="lens">
+          <span></span>
+        </div>
+        <div>
+          <h2>RTSP stays active on port 8554</h2>
+          <p>Use the stream URL with VLC, ffplay, OBS, or another RTSP client.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="panel metric">
+        <span>Protocol</span>
+        <strong>RTSP</strong>
+      </article>
+      <article class="panel metric">
+        <span>Mount</span>
+        <strong>/camera</strong>
+      </article>
+      <article class="panel metric">
+        <span>HTTP</span>
+        <strong id="httpHost">Port 80</strong>
+      </article>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+# Default Pi camera web interface.
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    root /var/www/picam;
+
+    index index.html;
+
+    server_name _;
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+
+    location /healthz {
+        access_log off;
+        add_header Content-Type text/plain;
+        return 200 "ok\n";
+    }
+
+    error_page 500 502 503 504 /50x.html;
+}
