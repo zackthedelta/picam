@@ -1,11 +1,13 @@
 [Unit]
 Description=Pi Camera RTSP Stream
-After=network-online.target
 Wants=network-online.target
+After=network-online.target picam-mjpeg.service
+Requires=picam-mjpeg.service
 
 [Service]
 Type=simple
 EnvironmentFile=-/etc/default/picam-rtsp
+ExecStartPre=/usr/bin/picam-wait-network 60
 ExecStart=/usr/bin/picam-rtsp
 Restart=on-failure
 RestartSec=2

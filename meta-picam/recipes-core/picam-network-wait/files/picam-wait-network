@@ -1,0 +1,17 @@
+#!/bin/sh
+set -eu
+
+TIMEOUT="${1:-60}"
+elapsed=0
+
+while [ "${elapsed}" -lt "${TIMEOUT}" ]; do
+    if ip -4 -o addr show scope global 2>/dev/null | grep -q ' inet '; then
+        exit 0
+    fi
+
+    sleep 1
+    elapsed=$((elapsed + 1))
+done
+
+echo "Timed out waiting for a non-loopback IPv4 address" >&2
+exit 1

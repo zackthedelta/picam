@@ -6,6 +6,8 @@
   var openLink = document.getElementById("openLink");
   var httpHost = document.getElementById("httpHost");
   var hostStatus = document.getElementById("hostStatus");
+  var liveStream = document.getElementById("liveStream");
+  var streamState = document.getElementById("streamState");
 
   input.value = rtspUrl;
   openLink.href = rtspUrl;
@@ -37,4 +39,15 @@
     .catch(function () {
       hostStatus.textContent = "Offline";
     });
+
+  liveStream.addEventListener("load", function () {
+    streamState.textContent = "Live Web Preview";
+  });
+
+  liveStream.addEventListener("error", function () {
+    streamState.textContent = "Preview Waiting";
+    window.setTimeout(function () {
+      liveStream.src = "/stream.mjpg?reload=" + Date.now();
+    }, 3000);
+  });
 }());

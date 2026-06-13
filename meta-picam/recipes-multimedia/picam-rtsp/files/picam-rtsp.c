@@ -24,10 +24,9 @@ int main(int argc, char *argv[])
     mount = env_or_default("PICAM_RTSP_MOUNT", "/camera");
     pipeline = env_or_default(
         "PICAM_RTSP_PIPELINE",
-        "( libcamerasrc ! "
-        "video/x-raw,width=640,height=480,framerate=15/1 ! "
-        "queue ! videoconvert ! "
-        "x264enc tune=zerolatency speed-preset=ultrafast bitrate=1200 key-int-max=30 ! "
+        "( udpsrc port=5004 "
+        "caps=\"application/x-rtp,media=(string)video,encoding-name=(string)H264,payload=(int)96,clock-rate=(int)90000\" ! "
+        "rtph264depay ! "
         "h264parse config-interval=1 ! "
         "rtph264pay name=pay0 pt=96 )");
 

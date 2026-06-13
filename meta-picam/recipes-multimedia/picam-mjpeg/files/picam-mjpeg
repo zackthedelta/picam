@@ -1,0 +1,31 @@
+#!/bin/sh
+set -eu
+
+if [ -r /etc/default/picam-mjpeg ]; then
+    . /etc/default/picam-mjpeg
+fi
+
+PICAM_MJPEG_HOST="${PICAM_MJPEG_HOST:-127.0.0.1}"
+PICAM_MJPEG_PORT="${PICAM_MJPEG_PORT:-8081}"
+PICAM_MJPEG_WIDTH="${PICAM_MJPEG_WIDTH:-640}"
+PICAM_MJPEG_HEIGHT="${PICAM_MJPEG_HEIGHT:-480}"
+PICAM_MJPEG_FRAMERATE="${PICAM_MJPEG_FRAMERATE:-10/1}"
+PICAM_MJPEG_QUALITY="${PICAM_MJPEG_QUALITY:-75}"
+PICAM_RTP_HOST="${PICAM_RTP_HOST:-127.0.0.1}"
+PICAM_RTP_PORT="${PICAM_RTP_PORT:-5004}"
+PICAM_H264_BITRATE="${PICAM_H264_BITRATE:-1200}"
+PICAM_H264_KEY_INT_MAX="${PICAM_H264_KEY_INT_MAX:-30}"
+
+exec gst-launch-1.0 -e \
+    libcamerasrc ! \
+    "video/x-raw,width=${PICAM_MJPEG_WIDTH},height=${PICAM_MJPEG_HEIGHT},framerate=${PICAM_MJPEG_FRAMERATE}" ! \
+    tee name=camera \
+    camera. ! queue leaky=downstream max-size-buffers=2 ! videoconvert ! \
+    jpegenc quality="${PICAM_MJPEG_QUALITY}" ! \
+    multipartmux boundary=picam ! \
+    tcpserversink host="${PICAM_MJPEG_HOST}" port="${PICAM_MJPEG_PORT}" sync=false \
+    camera. ! queue leaky=downstream max-size-buffers=30 ! videoconvert ! \
+    x264enc tune=zerolatency speed-preset=ultrafast bitrate="${PICAM_H264_BITRATE}" key-int-max="${PICAM_H264_KEY_INT_MAX}" ! \
+    h264parse config-interval=1 ! \
+    rtph264pay config-interval=1 pt=96 ! \
+    udpsink host="${PICAM_RTP_HOST}" port="${PICAM_RTP_PORT}" sync=false async=false

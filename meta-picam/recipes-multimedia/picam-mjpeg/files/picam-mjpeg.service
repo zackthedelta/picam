@@ -1,0 +1,15 @@
+[Unit]
+Description=Pi Camera Shared Capture Fanout
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+EnvironmentFile=-/etc/default/picam-mjpeg
+ExecStartPre=/usr/bin/picam-wait-network 60
+ExecStart=/usr/bin/picam-mjpeg
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target

@@ -1,4 +1,4 @@
-SUMMARY = "Boot-time RTSP server for Raspberry Pi camera"
+SUMMARY = "RTSP server for the shared Pi camera RTP fanout"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
 
@@ -37,9 +37,9 @@ SYSTEMD_AUTO_ENABLE:${PN} = "enable"
 
 RDEPENDS:${PN} = " \
     gstreamer1.0 \
-    gstreamer1.0-plugins-base-videoconvertscale \
     gstreamer1.0-plugins-good-rtp \
+    gstreamer1.0-plugins-good-udp \
     gstreamer1.0-plugins-bad-videoparsersbad \
-    gstreamer1.0-plugins-ugly-x264 \
-    libcamera-gst \
+    picam-mjpeg \
+    picam-network-wait \
 "

@@ -19,4 +19,4 @@ do_install() {
 
 FILES:${PN} = "${localstatedir}/www/picam"
 
-RDEPENDS:${PN} = "nginx picam-rtsp"
+RDEPENDS:${PN} = "nginx picam-rtsp picam-mjpeg"

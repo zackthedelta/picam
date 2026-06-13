@@ -28,21 +28,20 @@
         </div>
       </div>
 
-      <div class="preview">
-        <div class="lens">
-          <span></span>
-        </div>
-        <div>
-          <h2>RTSP stays active on port 8554</h2>
-          <p>Use the stream URL with VLC, ffplay, OBS, or another RTSP client.</p>
+      <div class="video-frame">
+        <img id="liveStream" src="/stream.mjpg" alt="Live camera stream">
+        <div class="stream-overlay">
+          <span id="streamState">Live Web Preview</span>
         </div>
       </div>
+
+      <p class="stream-note">RTSP stays available for VLC, ffplay, OBS, or another RTSP client.</p>
     </section>
 
     <section class="grid">
       <article class="panel metric">
         <span>Protocol</span>
-        <strong>RTSP</strong>
+        <strong>MJPEG + RTSP</strong>
       </article>
       <article class="panel metric">
         <span>Mount</span>
