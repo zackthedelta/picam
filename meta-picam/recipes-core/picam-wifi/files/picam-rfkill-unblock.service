@@ -1,0 +1,14 @@
+[Unit]
+Description=Unblock Wi-Fi radio for Pi camera networking
+DefaultDependencies=no
+Wants=systemd-udev-settle.service network-pre.target
+After=systemd-udev-settle.service
+Before=connman.service network-pre.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/sbin/rfkill unblock all
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
