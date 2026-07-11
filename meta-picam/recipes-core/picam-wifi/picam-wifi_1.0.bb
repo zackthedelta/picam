@@ -3,8 +3,8 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
 
 SRC_URI = " \
-    file://picam-rfkill-unblock.service \
-    file://picam-wifi.config \
+    file://picam-wifi.service \
+    file://picam-wifi.sh \
 "
 
 S = "${WORKDIR}"
@@ -12,19 +12,15 @@ S = "${WORKDIR}"
 inherit systemd
 
 do_install() {
-    install -d ${D}${systemd_system_unitdir}
-    install -m 0644 ${WORKDIR}/picam-rfkill-unblock.service ${D}${systemd_system_unitdir}/picam-rfkill-unblock.service
+    install -d ${D}${bindir}
+    install -m 0755 ${B}/picam-wifi.sh ${D}${bindir}/picam-wifi.sh
 
-    install -d ${D}${localstatedir}/lib/connman
-    install -m 0600 ${WORKDIR}/picam-wifi.config ${D}${localstatedir}/lib/connman/picam-wifi.config
+    install -d ${D}${systemd_system_unitdir}
+    install -m 0644 ${WORKDIR}/picam-wifi.service ${D}${systemd_system_unitdir}/picam-wifi.service
 }
 
-SYSTEMD_SERVICE:${PN} = "picam-rfkill-unblock.service"
+SYSTEMD_SERVICE:${PN} = "picam-wifi.service"
 SYSTEMD_AUTO_ENABLE:${PN} = "enable"
-
-FILES:${PN} += " \
-    ${localstatedir}/lib/connman/picam-wifi.config \
-"
 
 RDEPENDS:${PN} = " \
     connman \

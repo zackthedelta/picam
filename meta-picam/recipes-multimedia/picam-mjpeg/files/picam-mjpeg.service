@@ -1,7 +1,7 @@
 [Unit]
 Description=Pi Camera Shared Capture Fanout
 Wants=network-online.target
-After=network-online.target
+After=network-online.target picam-wifi.service
 
 [Service]
 Type=simple

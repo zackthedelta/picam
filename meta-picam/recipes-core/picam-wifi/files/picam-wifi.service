@@ -7,7 +7,7 @@ Before=connman.service network-pre.target
 
 [Service]
 Type=oneshot
-ExecStart=/usr/sbin/rfkill unblock all
+ExecStart=/usr/bin/picam-wifi.sh
 RemainAfterExit=yes
 
 [Install]
