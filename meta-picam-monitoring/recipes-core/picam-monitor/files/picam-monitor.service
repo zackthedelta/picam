@@ -1,0 +1,12 @@
+[Unit]
+Description=PiCam CPU and memory usage monitor
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/picam-monitor.sh
+Restart=always
+RestartSec=30
+
+[Install]
+WantedBy=multi-user.target
