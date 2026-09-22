@@ -23,6 +23,7 @@ SYSTEMD_SERVICE:${PN} = "picam-wifi.service"
 SYSTEMD_AUTO_ENABLE:${PN} = "enable"
 
 RDEPENDS:${PN} = " \
+    busybox \
     connman \
     util-linux-rfkill \
     wpa-supplicant \
